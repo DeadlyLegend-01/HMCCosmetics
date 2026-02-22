@@ -20,11 +20,14 @@ jobs:
           distribution: temurin
           java-version: 17
 
-      - name: Build with Maven
-        run: mvn clean package
+      - name: Make gradlew executable
+        run: chmod +x gradlew
 
-      - name: Upload Artifact
+      - name: Build with Gradle
+        run: ./gradlew build
+
+      - name: Upload JAR
         uses: actions/upload-artifact@v4
         with:
           name: HMCCosmetics
-          path: target/*.jar
+          path: build/libs/*.jar
